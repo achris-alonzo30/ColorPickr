@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Main Page{% endblock %}
+
+{% block content %}
+    {% include 'header.html' %}
+
+    <div class="body-content container d-flex flex-column justify-content-center align-items-center">
+        <h1 class="mt-4 typing-effect-1"><b></b></h1>
+        <div class="card my-3 p-2 border shadow rounded">
+            <div class="card-body ">
+                <form action="{{ url_for('main') }}" method="POST" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+                    <div class="my-3 select-number-of-colors">
+                        <label for="colors" class="form-label"><b>{{ form.colors.label }}:</b></label>
+                        {{ form.colors(class="form-select") }}
+                    </div>
+
+                    <div class="my-3 select-color-code">
+                        <label for="color_code" class="form-label"><b>{{ form.color_code.label }}:</b></label>
+                        {{ form.color_code(class="form-select") }}
+                    </div>
+                    <div class="my-3 upload-image">
+                        <label for="image" class="form-label"><b>Upload Image:</b></label>
+                        {{ form.image(class="form-control") }}
+                    </div>
+                    <button type="submit" class="btn submit-btn my-2">{{ form.submit.label }}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {% block scripts %}
+        <script>
+
+            // *********************** Typing Effect *********************** \\
+            const typingText = document.querySelector('.typing-effect-1');
+            const textToType = 'Where you can capture colors and craft your creations.';
+            let currentIndex = 0;
+
+            function typeText() {
+                if (currentIndex < textToType.length) {
+                    typingText.textContent += textToType.charAt(currentIndex);
+                    currentIndex++;
+                    setTimeout(typeText, 50); // Adjust the typing speed here
+                }
+            }
+
+            typeText();
+
+            // *********************** Load Image *********************** \\
+
+        </script>
+    {% endblock %}
+{% endblock %}

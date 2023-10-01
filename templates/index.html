@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Index Page{% endblock %}
+
+{% block content %}
+    <div class="container d-flex flex-column justify-content-center align-items-center text-center" style="height: 100vh;">
+        <h1 class="website-title-index slide-in-effect">Welcome to PalettePickr</h1>
+        <p class="paragraph-index-styles slide-in-effect"><i>Where you can capture colors and craft your creations.</i></p>
+        <a href="{{ url_for('main') }}">
+            <img class="my-2 logo-index slide-in-effect" src="{{ url_for('static', filename='images/PalettePickr-logo.png') }}" alt="website-logo">
+        </a>
+        <p class="mt-2 button-text-styles typing-effect"><b></b></p>
+    </div>
+
+    {% block scripts %}
+        <script>
+            // *********************** Slide In Effect *********************** \\
+            const elementsToAnimate = document.querySelectorAll('.slide-in-effect');
+
+            elementsToAnimate.forEach(element => {
+                element.style.opacity = 1;
+                element.style.transform = 'translateX(0)';
+            });
+
+            // *********************** Typing Effect *********************** \\
+            window.addEventListener('DOMContentLoaded', (event) => {
+                const elementsToAnimate = document.querySelectorAll('.slide-in-effect');
+
+                elementsToAnimate.forEach(element => {
+                    element.style.opacity = 1;
+                    element.style.transform = 'translateX(0)';
+                });
+
+                // After slide-in animation finishes, add typing effect
+                setTimeout(() => {
+                    const typingText = document.querySelector('.typing-effect');
+                    const textToType = 'CLICK THE LOGO TO GET STARTED';
+                    let currentIndex = 0;
+
+                    function typeText() {
+                        if (currentIndex < textToType.length) {
+                            typingText.textContent += textToType.charAt(currentIndex);
+                            currentIndex++;
+                            setTimeout(typeText, 100); // Adjust the typing speed here
+                        }
+                    }
+
+                    typeText();
+                }, 2000); // Adjust the delay to match your slide-in animation duration
+            });
+
+            // *********************** Trailing Cursor Effect *********************** \\
+            const colors = ['#028E5B', '#267BB3', '#E53C21', '#7D3B8B', '#E7BD17'];
+            const cursorTrails = [];
+
+            for (let i = 0; i < colors.length; i++) {
+                const cursorTrail = document.createElement('div');
+                cursorTrail.className = 'cursor-trail';
+                cursorTrail.style.backgroundColor = colors[i];
+                cursorTrail.style.left = `${i * 20}px`;
+                cursorTrails.push(cursorTrail);
+                document.body.appendChild(cursorTrail);
+            }
+
+            document.addEventListener('mousemove', (e) => {
+                for (let i = cursorTrails.length - 1; i >= 1; i--) {
+                    const currentTrail = cursorTrails[i];
+                    const previousTrail = cursorTrails[i - 1];
+
+                    currentTrail.style.left = previousTrail.style.left;
+                    currentTrail.style.top = previousTrail.style.top;
+                }
+
+                const firstTrail = cursorTrails[0];
+                firstTrail.style.left = e.clientX - 5 + 'px'; // Adjust the offset as needed
+                firstTrail.style.top = e.clientY - 5 + 'px'; // Adjust the offset as needed
+            });
+        </script>
+    {% endblock %}
+{% endblock %}

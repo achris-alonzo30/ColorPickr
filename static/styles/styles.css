@@ -1,0 +1,116 @@
+body {
+    background-color: #f1faee;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 12px;
+}
+/* ************************************** Index Styles ************************************** */
+.website-title-index {
+    font-size: 4rem;
+    color: #1d3557;
+}
+
+.paragraph-index-styles {
+    font-size: 1.3rem;
+    color: #1d3557;
+}
+
+.button-text-styles {
+    font-size: 1.5rem;
+    color: #1d3557;
+}
+
+.logo-index {
+    height: 200px;
+    width: 200px;
+}
+
+.slide-in-effect{
+    opacity: 0;
+    transform: translatex(-50%);
+    transition: opacity 5s ease, transform 3s ease;
+}
+
+.typing-effect {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 3s steps(40, end);
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+.cursor-trail {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* ************************************** Main Styles ************************************** */
+.header {
+    background-color: #f1faee;
+    color: #1d3557;
+    padding: 10px 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.logo-main {
+    height: 50px;
+    width: 50px;
+}
+
+.body-content {
+    height: 75vh;
+}
+
+.website-title-main {
+    font-size: 2rem;
+    color: #1d3557;
+}
+
+.typing-effect-1 {
+    font-size: 4rem;
+    color: #1d3557;
+    font-family: 'Dancing Script', cursive;
+}
+
+.select-number-of-colors label {
+    font-size: 1rem;
+    color: #1d3557;
+}
+
+.select-color-code label {
+    font-size: 1rem;
+    color: #1d3557;
+}
+
+.upload-image label {
+    font-size: 1rem;
+    color: #1d3557;
+}
+
+.submit-btn {
+    background-color: #1d3557;
+    color: #f1faee;
+    width: 100%;
+}
+
+.submit-btn:hover {
+    background-color: #a8dadc;
+    color: #1d3557;
+}
+
+/* ************************************** Image Extract Styles ************************************** */
+.color-palettes {
+    background-color: #fff;
+}
+

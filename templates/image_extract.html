@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Image Color Extraction{% endblock %}
+
+{% block content %}
+    {% include 'header.html' %}
+
+    <div class="body-content d-flex flex-column justify-content-center align-items-center mt-5">
+        <div class="card border rounded shadow my-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-6 d-flex align-items-center justify-content-center">
+                        <img class="img-fluid border border-2 rounded shadow p-2" src="{{ image_url }}" alt="Uploaded Image">
+                    </div>
+                    <div class="col-lg-6 w-50">
+                        <div class="color-palettes ms-3">
+                            <div class="row justify-content-center">
+                                {% for color in unique_colors %}
+                                    <div class="col-lg-6 mb-1"> {# Create two columns #}
+                                        {% if color_code == 'RGB Code' %}
+                                            {% set rgb_color = color|join(', ') %}
+                                            <div class="color-border border border-2 rounded shadow p-4" style="background-color: rgb({{ rgb_color }});"></div>
+                                        {% else %}
+                                            <div class="color-border border border-2 rounded shadow p-4" style="background-color: {{ color|upper }};"></div>
+                                        {% endif %}
+                                        <a href="#" onclick="copyToClipboard(this, '{{ color }}', 'Color code {{ color|upper }} copied!')" style="text-decoration: none; ">
+                                            <p class="text-center" style="white-space: nowrap;">{{ color|upper }}</p>
+                                        </a>
+                                    </div>
+                                    {% if loop.index % 2 == 0 %} {# Create a new row after every 2 colors #}
+                                        </div><div class="row justify-content-center">
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    {% block scripts %}
+        <script>
+            function copyToClipboard(element, color, message) {
+                var range = document.createRange();
+                range.selectNode(element);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+                document.execCommand('copy');
+                window.getSelection().removeAllRanges();
+
+                // Display a custom message with the color code
+                var alert = document.createElement("div");
+                alert.classList.add("alert", "alert-success", "alert-dismissible", "fade", "show");
+                alert.innerHTML = "<strong>" + message + "</strong> You can now paste the color code wherever you want. <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>";
+                var header = document.querySelector(".header");
+                header.parentNode.insertBefore(alert, header);
+
+                setTimeout(function() {
+                  alert.remove();
+                }, 3000);
+            }
+        </script>
+    {% endblock %}
+{% endblock %}
